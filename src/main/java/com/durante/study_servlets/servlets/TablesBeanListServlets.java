@@ -38,7 +38,7 @@ public class TablesBeanListServlets extends HttpServlet {
         printWriter.println("</head>");
         printWriter.println("<body>");
         printWriter.println("<div class='container'>");
-        printWriter.println("<div class='fs-3'>Tables Normal</div>");
+        printWriter.println("<div class='fs-3'>Tables With Bean</div>");
         printWriter.println("<table class='table'>");
         printWriter.println("<thead>");
         printWriter.println("<tr>");
