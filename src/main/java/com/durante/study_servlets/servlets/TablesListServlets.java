@@ -17,6 +17,61 @@ public class TablesListServlets extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8"); // 응답을 보낼 때 한글이 깨지지 않게 해주는 것. 백엔드를 위한 것
         PrintWriter printWriter = response.getWriter();
 
+        printWriter.println("<html lang='en'>");
+        printWriter.println("<head>");
+        printWriter.println("<meta charset='UTF-8'>");
+        printWriter.println("<title>Document</title>");
+        printWriter.println("<link");
+        printWriter.println("href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css'");
+        printWriter.println("rel='stylesheet'");
+        printWriter.println("integrity='sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65'");
+        printWriter.println("crossorigin='anonymous'");
+        printWriter.println("/>");
+        printWriter.println("<link rel='stylesheet' href='./css/commons.css' />");
+        printWriter.println("</head>");
+        printWriter.println("<body>");
+        printWriter.println("<div class='container'>");
+        printWriter.println("<div class='fs-3'>Tables Normal</div>");
+        printWriter.println("<table class='table'>");
+        printWriter.println("<thead>");
+        printWriter.println("<tr>");
+        printWriter.println("<th scope=>#</th>");
+        printWriter.println("<th scope=>First</th>");
+        printWriter.println("<th scope=>Last</th>");
+        printWriter.println("<th scope=>Handle</th>");
+        printWriter.println("</tr>");
+        printWriter.println("</thead>");
+        printWriter.println("<tbody>");
+        printWriter.println("<tr>");
+        printWriter.println("<th scope=>1</th>");
+        printWriter.println("<td>Mark</td>");
+        printWriter.println("<td>Otto</td>");
+        printWriter.println("<td>@mdo</td>");
+        printWriter.println("</tr>");
+        printWriter.println("<tr>");
+        printWriter.println("<th scope=>2</th>");
+        printWriter.println("<td>Jacob</td>");
+        printWriter.println("<td>Thornton</td>");
+        printWriter.println("<td>@fat</td>");
+        printWriter.println("</tr>");
+        printWriter.println("<tr>");
+        printWriter.println("<th scope=>3</th>");
+        printWriter.println("<td>Larry</td>");
+        printWriter.println("<td>Wendy</td>");
+        printWriter.println("<td>@twitter</td>");
+        printWriter.println("</tr>");
+        printWriter.println("</tbody>");
+        printWriter.println("</table>");
+        printWriter.println("</div>");
+
+        printWriter.println("<script");
+        printWriter.println("src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js'");
+        printWriter.println("integrity='sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4'");
+        printWriter.println("crossorigin='anonymous'");
+        printWriter.println("></script>");
+        printWriter.println("</body>");
+        printWriter.println("</html>");
+
         printWriter.close();
     }
 }
