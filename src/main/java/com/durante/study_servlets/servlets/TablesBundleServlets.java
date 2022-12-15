@@ -13,16 +13,21 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = "/tablesListServlets")
-public class TablesListServlets extends HttpServlet {
+@WebServlet(urlPatterns = "/tablesBundleServlets")
+public class TablesBundleServlets extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8"); // 응답을 보낼 때 한글이 깨지지 않게 해주는 것. 백엔드를 위한 것
         DatasInfo datasInfo = new DatasInfo();
-        ArrayList<String> tablesListWithString = datasInfo.getTablesListWithString();
+        HashMap<String, Object> bundlesData = datasInfo.getBundleData();
+
+        HashMap<String, String> searchForm = (HashMap<String, String>) bundlesData.get("searchForm");
+        ArrayList<String> tablesListWithString = (ArrayList<String>) bundlesData.get("tablesListWithString");
+        // ArrayList<String> tablesListWithString = datasInfo.getTablesListWithString();
+        // HashMap<String, String> searchForm = datasInfo.getSearchFormData();
+
         PrintWriter printWriter = response.getWriter();
-        HashMap<String, String> searchForm = datasInfo.getSearchFormData();
 
         printWriter.println("<html lang='en'>");
         printWriter.println("<head>");
@@ -38,7 +43,7 @@ public class TablesListServlets extends HttpServlet {
         printWriter.println("</head>");
         printWriter.println("<body>");
         printWriter.println("<div class='container'>");
-        printWriter.println("<div class='fs-3'>Tables Normal</div>");
+        printWriter.println("<div class='fs-3'>Tables Normal With Bundle Datas</div>");
         printWriter.println("<table class='table'>");
         printWriter.println("<thead>");
         printWriter.println("<tr>");
