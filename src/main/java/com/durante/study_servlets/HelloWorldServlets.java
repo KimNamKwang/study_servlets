@@ -18,7 +18,7 @@ public class HelloWorldServlets extends HttpServlet {
         printWriter.println("<html lang='en'>");
         printWriter.println("<head>");
         printWriter.println("<title>" + message + "</title>");
-        printWriter.println(" </head>");
+        printWriter.println("</head>");
         printWriter.println("<body>");
         printWriter.println("<div>" + message + "</div>");
         printWriter.println("</body>");
