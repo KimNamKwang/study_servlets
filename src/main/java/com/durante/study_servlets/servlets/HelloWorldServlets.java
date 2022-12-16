@@ -1,4 +1,4 @@
-package com.durante.study_servlets;
+package com.durante.study_servlets.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,9 +12,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class HelloWorldServlets extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String firstName = request.getParameter("firstName");
-        String secondName = request.getParameter("secondName");
-        String hiddenParam = request.getParameter("hiddenParam");
+        // request.getParameter(LEGACY_DO_HEAD)
+
         String message = "Hello World Servlets With Message!";
         PrintWriter printWriter = response.getWriter();
 
@@ -23,13 +22,7 @@ public class HelloWorldServlets extends HttpServlet {
         printWriter.println("<title>" + message + "</title>");
         printWriter.println("</head>");
         printWriter.println("<body>");
-        printWriter.println("<div> firstName : " + firstName + "</div>");
-        printWriter.println("<div> secondName : " + secondName + "</div>");
-        printWriter.println("<form action='/helloWorldServlets' method='get'>");
-        printWriter.println("<input type='text' name='firstName' value='" + firstName + "' id='' />");
-        printWriter.println("<input type='text' name='secondName' value=' " + secondName + "' id='' />");
-        printWriter.println("<button>Recall helloWorldServlets</button>");
-        printWriter.println("</form>");
+        printWriter.println("<div>" + message + "</div>");
         printWriter.println("</body>");
         printWriter.println("</html>");
 
