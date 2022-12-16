@@ -55,6 +55,8 @@ public class TablesBeanListServlets extends HttpServlet {
         // + " " + memberBean.getHandleName() + "</div>");
 
         MemberBean memberBean2 = (MemberBean) bundlesData.get("dataWithMemberBean");
+        // cast 해준 부분(MemberBean). cast는 집어넣을때 object의 후손으로 넣었다가
+        // 원래 가지고 있는 데이터 타입으로 빼준다
         printWriter.println("<div class='fs-4'>" + memberBean2.getFirstName() + " " + memberBean2.getSecondName()
                 + " " + memberBean2.getHandleName() + "</div>");
 
@@ -62,12 +64,14 @@ public class TablesBeanListServlets extends HttpServlet {
         printWriter.println("<thead>");
         printWriter.println("<tr>");
         printWriter.println("<th scope=>#</th>");
-        // printWriter.println("<th scope=>First</th>");
-        // printWriter.println("<th scope=>Last</th>");
+        printWriter.println("<th scope=>First</th>");
+        printWriter.println("<th scope=>Last</th>");
         printWriter.println("<th scope=>Handle</th>");
         printWriter.println("</tr>");
         printWriter.println("</thead>");
         printWriter.println("<tbody>");
+
+        // String만 출력
         // for (int i = 0; i < tablesListWithString.size(); i++) {
         // printWriter.println("<tr>");
         // printWriter.println("<th scope=>" + (i + 1) + "</th>");
@@ -77,6 +81,23 @@ public class TablesBeanListServlets extends HttpServlet {
         // printWriter.println("<td>" + handle + "</td>");
         // printWriter.println("</tr>");
         // }
+
+        ArrayList<MemberBean> dataListWithMemberBean = (ArrayList<MemberBean>) bundlesData
+                .get("dataListWithMemberBean");
+
+        for (int i = 0; i < dataListWithMemberBean.size(); i++) {
+            // 넣은 순서의 반대로 해체해서 데이터를 꺼낸다
+            MemberBean memberBean3 = dataListWithMemberBean.get(i);
+            printWriter.println("<tr>");
+            printWriter.println("<th scope=>" + (i + 1) + "</th>");
+            // printWriter.println("<td>Mark</td>");
+            // printWriter.println("<td>Otto</td>");
+            String handle = memberBean3.getHandleName();
+            printWriter.println("<td>" + memberBean3.getFirstName() + "</td>");
+            printWriter.println("<td>" + memberBean3.getSecondName() + "</td>");
+            printWriter.println("<td>" + handle + "</td>");
+            printWriter.println("</tr>");
+        }
 
         printWriter.println("</tbody>");
         printWriter.println("</table>");
