@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.durante.study_servlets.DatasInfo;
+import com.durante.study_servlets.beans.MemberBean;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -19,8 +20,18 @@ public class TablesBeanListServlets extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8"); // 응답을 보낼 때 한글이 깨지지 않게 해주는 것. 백엔드를 위한 것
+
+        // 여기서부터 액션을 취하는 부분
         DatasInfo datasInfo = new DatasInfo();
-        ArrayList<String> tablesListWithString = datasInfo.getTablesListWithString();
+        MemberBean memberBean = datasInfo.getDataWithMemberBean();
+        HashMap<String, Object> bundlesData = datasInfo.getBundleData();
+
+        System.out.println(memberBean.getFirstName() + " " + memberBean.getSecondName()
+                + " " + memberBean.getHandleName());
+
+        // 여기까지
+
+        // 여기서부터는 Display영역
         PrintWriter printWriter = response.getWriter();
         HashMap<String, String> searchForm = datasInfo.getSearchFormData();
 
@@ -39,6 +50,14 @@ public class TablesBeanListServlets extends HttpServlet {
         printWriter.println("<body>");
         printWriter.println("<div class='container'>");
         printWriter.println("<div class='fs-3'>Tables With Bean</div>");
+        // printWriter.println("<div class='fs-4'>" + memberBean.getFirstName() + " " +
+        // memberBean.getSecondName()
+        // + " " + memberBean.getHandleName() + "</div>");
+
+        MemberBean memberBean2 = (MemberBean) bundlesData.get("dataWithMemberBean");
+        printWriter.println("<div class='fs-4'>" + memberBean2.getFirstName() + " " + memberBean2.getSecondName()
+                + " " + memberBean2.getHandleName() + "</div>");
+
         printWriter.println("<table class='table'>");
         printWriter.println("<thead>");
         printWriter.println("<tr>");
@@ -49,15 +68,15 @@ public class TablesBeanListServlets extends HttpServlet {
         printWriter.println("</tr>");
         printWriter.println("</thead>");
         printWriter.println("<tbody>");
-        for (int i = 0; i < tablesListWithString.size(); i++) {
-            printWriter.println("<tr>");
-            printWriter.println("<th scope=>" + (i + 1) + "</th>");
-            // printWriter.println("<td>Mark</td>");
-            // printWriter.println("<td>Otto</td>");
-            String handle = tablesListWithString.get(i);
-            printWriter.println("<td>" + handle + "</td>");
-            printWriter.println("</tr>");
-        }
+        // for (int i = 0; i < tablesListWithString.size(); i++) {
+        // printWriter.println("<tr>");
+        // printWriter.println("<th scope=>" + (i + 1) + "</th>");
+        // // printWriter.println("<td>Mark</td>");
+        // // printWriter.println("<td>Otto</td>");
+        // String handle = tablesListWithString.get(i);
+        // printWriter.println("<td>" + handle + "</td>");
+        // printWriter.println("</tr>");
+        // }
 
         printWriter.println("</tbody>");
         printWriter.println("</table>");
