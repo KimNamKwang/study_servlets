@@ -2,6 +2,8 @@ package com.durante.study_servlets.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.durante.study_servlets.dao.SimpleWithDB;
 
@@ -15,11 +17,23 @@ public class SimpleWithDBServlets extends HttpServlet {
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException{
       //business 부분
-        SimpleWithDB simpleWithDB = new SimpleWithDB();
-        simpleWithDB.getList();
-       //display 부분
-        PrintWriter printWriter = response.getWriter();
-        printWriter.println("<div>SimpleWithDBServlets</div>");
-        printWriter.close();
+      SimpleWithDB simpleWithDB = new SimpleWithDB();
+      ArrayList<HashMap> bundle_list = simpleWithDB.getList();
+      response.setContentType("text/html;charset=UTF-8"); // 응답을 보낼 때 한글이 깨지지 않게 해주는 것. 백엔드를 위한 것
+
+
+      // display
+      PrintWriter printWriter = response.getWriter();
+      printWriter.println("<div>SimpleWithDBServlets</div>");
+      for(int i = 0; i < bundle_list.size(); i++) {
+          HashMap<String, Object> bundle =  bundle_list.get(i);
+          HashMap<String, Object> question = (HashMap<String, Object>) bundle.get("question");
+          int orders = (int) question.get("ORDERS");
+          String questions = (String) question.get("QUESTIONS");
+          String questions_uid = (String) question.get("QUESTIONS_UID");
+          printWriter.println("<div>"+orders+". "+questions+"<input type='hidden' value='"+questions_uid+"' /></div>");
+      }
+      printWriter.close();
+
     }
 }
