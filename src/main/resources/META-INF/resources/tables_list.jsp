@@ -1,4 +1,6 @@
 <!--HttpServletRequest request, HttpServletResponse response 값 이렇게 들어온것.-->
+<!--한글-->
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- import해줘야 함 -->
 <%@ page import="java.util.HashMap, java.util.ArrayList" %>
 <!DOCTYPE html>
