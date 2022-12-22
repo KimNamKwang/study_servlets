@@ -39,6 +39,13 @@ public class DetailServlets extends HttpServlet {
             exception.printStackTrace();
         }
 
+        HashMap<String, Object> questionsList = null;
+        try {
+            questionsList = pollWithDB.getQuestionsListAll();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+
         // output with html 부분
 
         /**
