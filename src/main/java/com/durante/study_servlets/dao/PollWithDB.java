@@ -51,14 +51,14 @@ public class PollWithDB {
 
         HashMap<String, Object> resultForAnswerList = null;
 
-        ArrayList arrayListForAnswers;
+        ArrayList arrayListForAnswers = null;
 
         // HashMap에 한 row씩 담아서 ArrayList에 담아주고 ArrayList를 return해줘야 한다
 
-        for(int i = 0; i < ){
+        // for(int i = 0; i < ){
 
-        }
-        
+        // }
+
         while (resultSet.next()) {
             resultForAnswerList = new HashMap<>();
             resultForAnswerList.put("QUESTIONS_UID", resultSet.getString("QUESTIONS_UID"));
