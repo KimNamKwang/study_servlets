@@ -14,15 +14,14 @@
      HashMap<String, Object> question = (HashMap<String, Object>)request.getAttribute("question");
       %>
     <div>
-      <a href="/polls/PollServlet?QUESTIONS_UID=Q1">Q1</a> /
-      <a href="/polls/PollServlet?QUESTIONS_UID=Q2">Q2</a> /
-      <a href="/polls/PollServlet?QUESTIONS_UID=Q3">Q3</a> /
-      <a href="/polls/PollServlet?QUESTIONS_UID=Q4">Q4</a> /
+      <a href="/polls/PollServlet?QUESTIONS_UID=Q1">Q1</a> 
+      <a href="/polls/PollServlet?QUESTIONS_UID=Q2">Q2</a> 
+      <a href="/polls/PollServlet?QUESTIONS_UID=Q3">Q3</a> 
+      <a href="/polls/PollServlet?QUESTIONS_UID=Q4">Q4</a> 
       <a href="/polls/PollServlet?QUESTIONS_UID=Q5">Q5</a> 
     </div>
     <div>
       <%= question.get("ORDERS") %>.<%= (question.get("QUESTIONS")%>
-      <!-- 이 부분을 출력하는것 2. 주문시 직원은 고객님께 친절 하였습니까?-->
     </div>
     <div>(1) 전혀 아니다</div>
     <div>(2) 아니다</div>

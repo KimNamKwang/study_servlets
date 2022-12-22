@@ -18,6 +18,7 @@ public class DetailServlets extends HttpServlet {
     // details.html의 a태그의 링크를 get방식으로 받아주기 위해 doGet선언
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
+        response.setContentType("text/html;charset=UTF-8");
         // 클라이언트가 요청하는 파라미터는 전부 request에서 들어온다.
 
         // input부분
