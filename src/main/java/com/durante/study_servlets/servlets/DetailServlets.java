@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = "/polls/PollsServlet")
+@WebServlet(urlPatterns = "/polls/PollServlet")
 public class DetailServlets extends HttpServlet {
     // details.html의 a태그의 링크를 get방식으로 받아주기 위해 doGet선언
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -49,7 +49,8 @@ public class DetailServlets extends HttpServlet {
          * // printWriter.close();
          */
 
-        request.setAttribute("question", question);// 받는 입장(jsp)에서 생각
+        request.setAttribute("question", question);
+        // 받는 입장(jsp)에서 생각, request에 set으로 넣었으니 받는 입장에서는 get으로 받아올 수 있다.
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/polls/details.jsp");
         requestDispatcher.forward(request, response);
