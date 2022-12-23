@@ -2,6 +2,7 @@ package com.durante.study_servlets.servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.durante.study_servlets.dao.PollWithDB;
@@ -24,7 +25,7 @@ public class DetailServlets extends HttpServlet {
         // input부분
 
         String questions_Uid = request.getParameter("QUESTIONS_UID");
-        // 클라이언트가 던진 파라미터(HashMap 형태) 중 QUESTIONS_UID 키를 가진 밸류를 변수에 담음
+         // 클라이언트가 던진 파라미터(HashMap 형태) 중 QUESTIONS_UID 키를 가진 밸류를 변수에 담음
 
         // business with DB and Class 부분
         PollWithDB pollWithDB = new PollWithDB();// 값을 받아오기 위해 인스턴스화
@@ -39,13 +40,24 @@ public class DetailServlets extends HttpServlet {
             exception.printStackTrace();
         }
 
-        HashMap<String, Object> questionsList = null;
+
+
+        
+
+
+
+        ArrayList<HashMap<String, Object>> questionsList = null;
+        HashMap<String, Object> list1 = null;
         try {
             questionsList = pollWithDB.getQuestionsListAll();
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
 
+
+        for(int i = 0; i < questionsList.size(); i++){
+            // list1 
+        }
         // output with html 부분
 
         /**
@@ -57,8 +69,14 @@ public class DetailServlets extends HttpServlet {
          * // printWriter.close();
          */
 
-        request.setAttribute("question", question);
+
+
+        // request.setAttribute("question", question);
         // 받는 입장(jsp)에서 생각, request에 set으로 넣었으니 받는 입장에서는 get으로 받아올 수 있다.
+
+
+        request.setAttribute("questionsList", questionsList);
+
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/polls/details.jsp");
         requestDispatcher.forward(request, response);

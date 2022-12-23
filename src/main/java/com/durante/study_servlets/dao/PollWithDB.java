@@ -37,7 +37,7 @@ public class PollWithDB {
         return result;
     }
 
-    public HashMap<String, Object> getQuestionsListAll() throws SQLException {
+    public ArrayList<HashMap<String, Object>> getQuestionsListAll() throws SQLException {
         // DB로그인을 위해 인스턴스화
         Commons commons = new Commons();
 
@@ -49,22 +49,30 @@ public class PollWithDB {
 
         ResultSet resultSet = statement.executeQuery(query);
 
+        ArrayList<HashMap<String, Object>> arrayListForAnswers = new ArrayList<>();
+        
         HashMap<String, Object> resultForAnswerList = null;
-
-        ArrayList arrayListForAnswers = null;
 
         // HashMap에 한 row씩 담아서 ArrayList에 담아주고 ArrayList를 return해줘야 한다
 
-        // for(int i = 0; i < ){
-
-        // }
-
+        
         while (resultSet.next()) {
             resultForAnswerList = new HashMap<>();
             resultForAnswerList.put("QUESTIONS_UID", resultSet.getString("QUESTIONS_UID"));
             resultForAnswerList.put("QUESTIONS", resultSet.getString("QUESTIONS"));
             resultForAnswerList.put("ORDERS", resultSet.getInt("ORDERS"));
+            for(int i = 0; i < 5; i++){
+                arrayListForAnswers.add(resultForAnswerList);
+                
+            }
         }
-        return resultForAnswerList;
+
+
+
+
+
+
+
+        return arrayListForAnswers;
     }
 }

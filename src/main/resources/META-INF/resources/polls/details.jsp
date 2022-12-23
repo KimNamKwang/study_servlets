@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import = "java.util.HashMap"%>
+<%@ page import = "java.util.HashMap, java.util.ArrayList;"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,9 +10,18 @@
   </head>
   <body>
     <!--HashMap 자체는 key는 string value는 object로(어떤 타입이 들어갈지 몰라서) 되어 있다.-->
-    <% 
+   <%-- <% 
     HashMap<String, Object> question = (HashMap<String, Object>)request.getAttribute("question");
+%> --%>
+
+
+<%-- 주석처리  --%>
+
+    <% 
+    ArrayList<HashMap<String, Object>> questionList = (ArrayList<HashMap<String, Object>>)request.getAttribute("questionList");
 %>
+
+
 <div> 
   <%-- <% String abc = question.get('QUESTIONS_UID')%> --%>
 
@@ -23,7 +32,7 @@
   <a href="/polls/PollServlet?QUESTIONS_UID=Q5">Q5</a>
 </div>
 <div>
-  <%= question.get("ORDERS") %>. <%= question.get("QUESTIONS")%>
+  <%= questionList.get("ORDERS") %>. <%= questionList.get("QUESTIONS")%>
 </div>
 <div>
   (1) 전혀 아니다
