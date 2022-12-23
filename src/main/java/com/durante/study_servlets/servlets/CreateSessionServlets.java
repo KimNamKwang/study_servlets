@@ -22,7 +22,7 @@ public class CreateSessionServlets extends HttpServlet {
         // display
         PrintWriter printWriter = response.getWriter();
         printWriter.println("<div>CreateSessionServlets</div>");
-        ;
+        
 
         // 로그인 되는 상태
         if ("yojulab".equals(username) && "1234".equals(password)) {
