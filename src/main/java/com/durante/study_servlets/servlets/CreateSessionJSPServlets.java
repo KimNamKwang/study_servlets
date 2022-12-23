@@ -45,6 +45,9 @@ public class CreateSessionJSPServlets extends HttpServlet {
                 httpSession.setAttribute("password", password);
 
             }
+            //로그인되어있는지 표시
+            System.out.println(httpSession.getAttribute("username"));
+            System.out.println(httpSession.getId());
             path = "/session/check_Login.jsp";
 
         } else {
@@ -54,6 +57,8 @@ public class CreateSessionJSPServlets extends HttpServlet {
                 httpSession.invalidate();//JSessionID삭제
 
             }
+            System.out.println(httpSession.getAttribute("username"));
+            System.out.println(httpSession.getId());
             path = "/session/check_Logout.jsp";
         }
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);

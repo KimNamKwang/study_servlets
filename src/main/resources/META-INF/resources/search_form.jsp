@@ -14,6 +14,12 @@
     <link rel="stylesheet" href="./css/commons.css" />
   </head>
   <body>
+    <%-- 다른 페이지에서도 로그인된것에 대한 정보 출력가능 --%>
+    <div>Check Login</div>
+    <div>username : <%= session.getAttribute("username")%></div>
+    <div>password : <%= session.getAttribute("password")%></div>
+    <div>JSession ID : <%= session.getId()%></div>
+
     <% int day = 3; %>
 
     <div class="container">
