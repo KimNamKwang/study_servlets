@@ -10,34 +10,27 @@
   </head>
   <body>
     <!--HashMap 자체는 key는 string value는 object로(어떤 타입이 들어갈지 몰라서) 되어 있다.-->
-   <%-- <% 
+    <% 
     HashMap<String, Object> question = (HashMap<String, Object>)request.getAttribute("question");
-%> --%>
+    ArrayList questionsUidList = (ArrayList) request.getAttribute("questionsUidList");
+		ArrayList answersList = (ArrayList) request.getAttribute("answersList");
+		String questionsUid = (String) request.getAttribute("questionsUid");
+%> 
 
 
 <%-- 주석처리  --%>
 
-    <% 
-    ArrayList<HashMap<String, Object>> questionList = (ArrayList<HashMap<String, Object>>)request.getAttribute("questionList");
-%>
-
 
 <div> 
-  <%-- <% String abc = question.get('QUESTIONS_UID')%> --%>
-
-  <a href="/polls/PollServlet?QUESTIONS_UID=Q1">Q1</a> / 
-  <a href="/polls/PollServlet?QUESTIONS_UID=Q2">Q2</a> /
-  <a href="/polls/PollServlet?QUESTIONS_UID=Q3">Q3</a> /
-  <a href="/polls/PollServlet?QUESTIONS_UID=Q4">Q4</a> /
-  <a href="/polls/PollServlet?QUESTIONS_UID=Q5">Q5</a>
+  <%  for (int i = 0; i < questionsUidList.size(); i++) { %>
+  <a href="/polls/PollServlet?QUESTIONS_UID= <%= questionsUidList.get(i)%>"><%= questionsUidList.get(i)%></a> / 
+  <%  } %>
+  <%= question.get("ORDERS") %>. <%= question.get("QUESTIONS")%>
 </div>
 <div>
-  <%= questionList.get("ORDERS") %>. <%= questionList.get("QUESTIONS")%>
-</div>
-<div>
-  (1) 전혀 아니다
-  (2) 아니다
-  (3) 보통이다
+  <% for (int i = 0; i <answersList.size(); i++) { %>
+    <%= i %> <%= questionsUid %>
+    <%= i %> <%= answersList.get(i) %>
 </div>
   </body>
 </html>

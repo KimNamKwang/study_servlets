@@ -25,39 +25,33 @@ public class DetailServlets extends HttpServlet {
         // input부분
 
         String questions_Uid = request.getParameter("QUESTIONS_UID");
-         // 클라이언트가 던진 파라미터(HashMap 형태) 중 QUESTIONS_UID 키를 가진 밸류를 변수에 담음
+        // 클라이언트가 던진 파라미터(HashMap 형태) 중 QUESTIONS_UID 키를 가진 밸류를 변수에 담음
 
         // business with DB and Class 부분
         PollWithDB pollWithDB = new PollWithDB();// 값을 받아오기 위해 인스턴스화
         HashMap<String, Object> question = null;
+        ArrayList questionsUidList = null;
+        ArrayList exampleUidList = null;
+        ArrayList answersList = null;
         try {
             // HashMap<String, Object>으로 되어있는 데이터를 그대로 받아줌
+
+            /* 각 변수에 값을 담음 */
             question = pollWithDB.getQuestion(questions_Uid);
+            questionsUidList = pollWithDB.getQuestionsUidList();
+            exampleUidList = pollWithDB.getExampleUidList(questions_Uid);
+            answersList = pollWithDB.getAnswersList(exampleUidList);
+
             System.out.println(question.get("QUESTIONS_UID"));
             System.out.println(question.get("QUESTIONS"));
             System.out.println(question.get("ORDERS"));
+            System.out.println(questionsUidList);
+            System.out.println(exampleUidList);
+            System.out.println(answersList);
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
 
-
-
-        
-
-
-
-        ArrayList<HashMap<String, Object>> questionsList = null;
-        HashMap<String, Object> list1 = null;
-        try {
-            questionsList = pollWithDB.getQuestionsListAll();
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
-
-
-        for(int i = 0; i < questionsList.size(); i++){
-            // list1 
-        }
         // output with html 부분
 
         /**
@@ -69,14 +63,14 @@ public class DetailServlets extends HttpServlet {
          * // printWriter.close();
          */
 
-
-
         // request.setAttribute("question", question);
         // 받는 입장(jsp)에서 생각, request에 set으로 넣었으니 받는 입장에서는 get으로 받아올 수 있다.
 
-
-        request.setAttribute("questionsList", questionsList);
-
+        request.setAttribute("question", question);
+        request.setAttribute("questionsUidList", questionsUidList);
+        request.setAttribute("exampleUidList", exampleUidList);
+        request.setAttribute("answersList", answersList);
+        request.setAttribute("questionsUid", questions_Uid);
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/polls/details.jsp");
         requestDispatcher.forward(request, response);

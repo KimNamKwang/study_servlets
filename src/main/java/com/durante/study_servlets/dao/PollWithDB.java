@@ -37,42 +37,65 @@ public class PollWithDB {
         return result;
     }
 
-    public ArrayList<HashMap<String, Object>> getQuestionsListAll() throws SQLException {
+    /*QuestionsUid 를 가져오는 Function */
+    public ArrayList getQuestionsUidList() throws SQLException {
+      
         // DB로그인을 위해 인스턴스화
         Commons commons = new Commons();
 
         // 쿼리문을 넣기 위해 Statement 가져옴
         Statement statement = commons.getStatement();
 
-        // QUESTIONS_LIST를 모두 select
-        String query = "SELECT * FROM QUESTIONS_LIST";
+        String query = "SELECT QUESTIONS_UID FROM QUESTIONS_LIST";
 
         ResultSet resultSet = statement.executeQuery(query);
 
-        ArrayList<HashMap<String, Object>> arrayListForAnswers = new ArrayList<>();
-        
-        HashMap<String, Object> resultForAnswerList = null;
-
-        // HashMap에 한 row씩 담아서 ArrayList에 담아주고 ArrayList를 return해줘야 한다
-
+        ArrayList questionsUidList = new ArrayList<>();
         
         while (resultSet.next()) {
-            resultForAnswerList = new HashMap<>();
-            resultForAnswerList.put("QUESTIONS_UID", resultSet.getString("QUESTIONS_UID"));
-            resultForAnswerList.put("QUESTIONS", resultSet.getString("QUESTIONS"));
-            resultForAnswerList.put("ORDERS", resultSet.getInt("ORDERS"));
-            for(int i = 0; i < 5; i++){
-                arrayListForAnswers.add(resultForAnswerList);
-                
+            // arraylist에 resultset에서 값을 가져와 넣음.
+            questionsUidList.add(resultSet.getString("questions_uid"));
+        }
+        return questionsUidList;
+    }
+
+    /*questionsUid를 입력받아서 ExampleUid를 가져오는 Function */
+    public ArrayList getExampleUidList(String questionsUid) throws SQLException {
+        Commons commons = new Commons();
+        Statement statement = commons.getStatement();
+        String query = "SELECT EXAMPLE_UID FROM ANSWERS WHERE QUESTIONS_UID='" + questionsUid + "'";
+
+        ResultSet resultSet = statement.executeQuery(query);
+        ArrayList exampleUidList = new ArrayList<>();
+        while (resultSet.next()) {
+            exampleUidList.add(resultSet.getString("EXAMPLE_UID"));
+        }
+        return exampleUidList;
+    }
+
+    /*ArrayList인 exampleUidList에서 ExampleUid를 가져와 답항을 가져오는 Function
+     * 의문점 - getExampleUidList 펑션의 return값인 exampleUidList를 호출없이 어떻게 사용가능한지
+     */
+    public ArrayList getAnswersList(ArrayList exampleUidList) throws SQLException {
+        Commons commons = new Commons();
+        Statement statement = commons.getStatement();
+        String exampleUid;
+        ArrayList examplesList = new ArrayList<>();
+
+        for (int i = 0; i < exampleUidList.size(); i++) {
+            
+            exampleUid = (String) exampleUidList.get(i);/*
+            exampleUidList에서 
+            */
+            String query = "select example from example_list where example_uid='" + exampleUid + "'";
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                //resultSet의 next가 있을때까지 ArrayList에 담음
+                examplesList.add(resultSet.getString("EXAMPLE"));
             }
         }
 
-
-
-
-
-
-
-        return arrayListForAnswers;
+        return examplesList;
     }
 }
