@@ -30,10 +30,11 @@ public class PollDetailServlets extends HttpServlet {
         // business with DB and Class 부분
         PollWithDB pollWithDB = new PollWithDB();// 값을 받아오기 위해 인스턴스화
         HashMap<String, Object> question = null;
+        ArrayList<HashMap<String, Object>> answer_list = null;
+
         ArrayList questionsUidList = null;
         ArrayList exampleUidList = null;
         ArrayList answersList = null;
-        ArrayList<HashMap<String, Object>> answer_list = null;
         try {
             // HashMap<String, Object>으로 되어있는 데이터를 그대로 받아줌
 
@@ -52,6 +53,9 @@ public class PollDetailServlets extends HttpServlet {
              */
 
             question = pollWithDB.getQuestion(questions_Uid);
+            System.out.println(question.get("QUESTIONS_UID"));
+            System.out.println(question.get("QUESTIONS"));
+            System.out.println(question.get("ORDERS"));
             answer_list = pollWithDB.getAnswersList(questions_Uid);
         } catch (SQLException exception) {
             exception.printStackTrace();

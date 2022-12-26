@@ -17,7 +17,7 @@ public class PollWithDB {
         Statement statement = commons.getStatement();
 
         // parameter로 들어오는 questionsUid 로 QUESTIONS_UID를 찾는 쿼리
-        String query = "SELECT * FROM QUESTIONS_LIST" +
+        String query = "SELECT * FROM QUESTIONS_LIST " +
                 " WHERE QUESTIONS_UID = '" + questionsUid + "'";
 
         // String queryForAnswersList = "SELECT * FROM EXAMPLE_LIST WHERE EXAMPLE_UID IN
@@ -102,30 +102,4 @@ public class PollWithDB {
         return exampleUidList;
     }
 
-    /*
-     * ArrayList인 exampleUidList에서 ExampleUid를 가져와 답항을 가져오는 Function
-     * 의문점 - getExampleUidList 펑션의 return값인 exampleUidList를 호출없이 어떻게 사용가능한지
-     */
-    public ArrayList getAnswersList(ArrayList exampleUidList) throws SQLException {
-        Commons commons = new Commons();
-        Statement statement = commons.getStatement();
-        String exampleUid;
-        ArrayList examplesList = new ArrayList<>();
-
-        for (int i = 0; i < exampleUidList.size(); i++) {
-
-            exampleUid = (String) exampleUidList.get(i);/*
-                                                         * exampleUidList에서
-                                                         */
-            String query = "select example from example_list where example_uid='" + exampleUid + "'";
-            ResultSet resultSet = statement.executeQuery(query);
-
-            while (resultSet.next()) {
-                // resultSet의 next가 있을때까지 ArrayList에 담음
-                examplesList.add(resultSet.getString("EXAMPLE"));
-            }
-        }
-
-        return examplesList;
-    }
 }
