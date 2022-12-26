@@ -3,6 +3,7 @@ package com.durante.study_servlets.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,7 +23,6 @@ public class CreateSessionServlets extends HttpServlet {
         // display
         PrintWriter printWriter = response.getWriter();
         printWriter.println("<div>CreateSessionServlets</div>");
-        
 
         // 로그인 되는 상태
         if ("yojulab".equals(username) && "1234".equals(password)) {
@@ -35,5 +35,11 @@ public class CreateSessionServlets extends HttpServlet {
             printWriter.println("<div>Failed</div>");
         }
         printWriter.close();
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        /* super가 아니라 this를 쓰면 doGet이 실행되게 된다. */
+        this.doGet(req, resp);
     }
 }

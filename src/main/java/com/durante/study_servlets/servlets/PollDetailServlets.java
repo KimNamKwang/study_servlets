@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet(urlPatterns = "/polls/PollServlet")
-public class DetailServlets extends HttpServlet {
+public class PollDetailServlets extends HttpServlet {
     // details.html의 a태그의 링크를 get방식으로 받아주기 위해 doGet선언
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
@@ -33,21 +33,26 @@ public class DetailServlets extends HttpServlet {
         ArrayList questionsUidList = null;
         ArrayList exampleUidList = null;
         ArrayList answersList = null;
+        ArrayList<HashMap<String, Object>> answer_list = null;
         try {
             // HashMap<String, Object>으로 되어있는 데이터를 그대로 받아줌
 
             /* 각 변수에 값을 담음 */
-            question = pollWithDB.getQuestion(questions_Uid);
-            questionsUidList = pollWithDB.getQuestionsUidList();
-            exampleUidList = pollWithDB.getExampleUidList(questions_Uid);
-            answersList = pollWithDB.getAnswersList(exampleUidList);
+            /*
+             * 만든 버전
+             * questionsUidList = pollWithDB.getQuestionsUidList();
+             * exampleUidList = pollWithDB.getExampleUidList(questions_Uid);
+             * answersList = pollWithDB.getAnswersList(exampleUidList);
+             * System.out.println(question.get("QUESTIONS_UID"));
+             * System.out.println(question.get("QUESTIONS"));
+             * System.out.println(question.get("ORDERS"));
+             * System.out.println(questionsUidList);
+             * System.out.println(exampleUidList);
+             * System.out.println(answersList);
+             */
 
-            System.out.println(question.get("QUESTIONS_UID"));
-            System.out.println(question.get("QUESTIONS"));
-            System.out.println(question.get("ORDERS"));
-            System.out.println(questionsUidList);
-            System.out.println(exampleUidList);
-            System.out.println(answersList);
+            question = pollWithDB.getQuestion(questions_Uid);
+            answer_list = pollWithDB.getAnswersList(questions_Uid);
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
@@ -66,11 +71,21 @@ public class DetailServlets extends HttpServlet {
         // request.setAttribute("question", question);
         // 받는 입장(jsp)에서 생각, request에 set으로 넣었으니 받는 입장에서는 get으로 받아올 수 있다.
 
+        /*
+         * 만든 버전
+         * request.setAttribute("questionsUidList", questionsUidList);
+         * request.setAttribute("exampleUidList", exampleUidList);
+         * request.setAttribute("answersList", answersList);
+         * request.setAttribute("questionsUid", questions_Uid);
+         */
+
+        for (int i = 0; i < answer_list.size(); i++) {
+            HashMap<String, Object> answer = answer_list.get(i);
+            System.out.println(answer.get("ORDERS"));
+            System.out.println(answer.get("EXAMPLE"));
+        }
         request.setAttribute("question", question);
-        request.setAttribute("questionsUidList", questionsUidList);
-        request.setAttribute("exampleUidList", exampleUidList);
-        request.setAttribute("answersList", answersList);
-        request.setAttribute("questionsUid", questions_Uid);
+        request.setAttribute("answer_list", answer_list);
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/polls/details.jsp");
         requestDispatcher.forward(request, response);

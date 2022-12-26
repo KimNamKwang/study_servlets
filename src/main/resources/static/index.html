@@ -43,7 +43,21 @@
     <div>
       <a href="/dispatcherJSPServlets">DispatcherJSPServlets</a>
     </div>
-    <h2>Cases</h2>
+
+    <div>
+      <a href="/session/createServlets?username=yojulab&password=1234"
+        >/session/createServlets?username=yojulab&password=1234 JAVA</a
+      >
+    </div>
+    <div>
+      <form action="/session/createServlets" method="post">
+        <input type="text" name="username" value="yojulab" />
+        <input type="text" name="password" value="1234" />
+        <button>session/createServlets With Post</button>
+      </form>
+    </div>
+
+    <div>Cases</div>
     <div>
       <a href="/polls/PollServlet?QUESTIONS_UID=Q1"
         >DetailsServlets.java /polls/details.jsp</a
