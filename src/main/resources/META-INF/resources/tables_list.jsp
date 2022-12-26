@@ -19,30 +19,31 @@
         <link rel="stylesheet" href="./css/commons.css" />
     </head>
     <body>
-        <%@ include file="navbars.jsp"%>
-
+        
         <% 
-          HashMap<String, String> searchForm = (HashMap<String, String>)request.getAttribute("searchForm");
-          ArrayList<String> tablesListWithString = (ArrayList<String>)request.getAttribute("tablesListWithString");
-         %>
+        HashMap<String, String> searchForm = (HashMap<String, String>)request.getAttribute("searchForm");
+        ArrayList<String> tablesListWithString = (ArrayList<String>)request.getAttribute("tablesListWithString");
+            %>
+
+        <%@ include file= "navbars.jsp" %>
     <div class="container">
-        <div class="fs-3">Tables Normal <%= searchForm.get("search_key")  %> </div>
-      <table class="table">
-        <thead>
-            <tr>
-                <th scope=>#</th>
-                <th scope=>Handle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <%  for (int i = 0; i < tablesListWithString.size(); i++) {%>
-            <tr>
-                <th scope=><%= (i+1) %></th>
-                <td><%= tablesListWithString.get(i) %></td>
-            </tr>
+        <div class='fs-3'>Tables Normal <%= searchForm.get("search_key") %></div>
+        <table class='table'>
+            <thead>
+                <tr>
+                    <th scope=>#</th>
+                    <th scope=>Handle</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% for(int i=0; i<tablesListWithString.size(); i++){ %>
+                <tr>
+                    <th scope=><%= (i+1) %></th>
+                    <td><%= tablesListWithString.get(i) %></td>
+                </tr>
             <% } %>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
     </div>
 
     <script
