@@ -13,24 +13,29 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebFilter("/*") /* 모든 웹사이트에서 들어오는것을 다 필터링 하겠다는 의미. 아무것도 안 써주는것과 동일함 */
-public class SimpleFilter implements Filter {
+@WebFilter("/session/*")
+public class SessionsFilter implements Filter {
 
     @Override
     public void destroy() {
 
     }
 
-    @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         System.out.println(request.getRemoteHost());
         System.out.println(request.getRemoteAddr());
+
+        /* url을 빼내기 위해 HttpServletRequest으로 선언 */
+        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+        HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+
+        String uri = httpServletRequest.getRequestURI();
+
         chain.doFilter(request, response);
 
     }
 
-    @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
     }
